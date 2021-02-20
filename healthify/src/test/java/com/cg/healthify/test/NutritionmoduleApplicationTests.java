@@ -1,5 +1,4 @@
 
-/*
   package com.cg.healthify.test;
  
 
@@ -24,7 +23,7 @@ public class NutritionmoduleApplicationTests {
 
 	@Mock
 	NutritionPlanRepository nutritionPlanRepository;
-/*
+
 	@Test
 	public void getNutritionPlanByIdForValidPlanId() {
 		NutritionPlan nutritionPlan = new NutritionPlan();
@@ -49,8 +48,7 @@ public class NutritionmoduleApplicationTests {
 		assertEquals(nutritionPlan,plan);
 
 	}
-	*/
-/*
+
 	@Test
 	public void createNutritionPlanForValidInput() {
 		NutritionPlan nutritionPlan = new NutritionPlan();
@@ -64,4 +62,4 @@ public class NutritionmoduleApplicationTests {
 	
 
 	}
-*/
+
