@@ -34,6 +34,9 @@ public class Exercise {
 	@Column(updatable = false, unique = true)
 	private String exIdentifier;
 	
+	@NotBlank(message = "Exercise Type should not be blank")
+	private String exType;
+	
 	@NotNull
 	@Range(min=1,max=10,message="set range should be within 1 to 10 ")
 	private int exSets;
@@ -56,17 +59,12 @@ public class Exercise {
 	
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private LocalDateTime created_At;
+	private LocalDateTime createdAt;
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private LocalDateTime updated_At;
+	private LocalDateTime updatedAt;
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 	public String getExIdentifier() {
 		return exIdentifier;
 	}
@@ -87,27 +85,66 @@ public class Exercise {
 		this.exReps = exReps;
 	}
 	
-	public LocalDateTime getCreated_At() {
-		return created_At;
+	public String getExType() {
+		return exType;
 	}
-	public void setCreated_At(LocalDateTime created_At) {
-		this.created_At = created_At;
-	}
-	public LocalDateTime getUpdated_At() {
-		return updated_At;
-	}
-	public void setUpdated_At(LocalDateTime updated_At) {
-		this.updated_At = updated_At;
+	public void setExType(String exType) {
+		this.exType = exType;
 	}
 	
 	@PrePersist
 	public void onCreate() {
-		this.created_At = LocalDateTime.now();
+		this.createdAt = LocalDateTime.now();  
 	}
 	
 	@PreUpdate
 	public void onUpdate() {
-		this.updated_At = LocalDateTime.now();
+		this.updatedAt = LocalDateTime.now();
 	}
+	
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+	public Exercise(int id,
+			@NotBlank(message = "Exercise Identifier should not be blank") @Size(min = 3, max = 10, message = "Please use 3 to 10 charecters") String exIdentifier,
+			@NotBlank String exType,
+			@NotNull @Range(min = 1, max = 10, message = "set range should be within 1 to 10 ") int exSets,
+			@NotNull @Range(min = 1, max = 40, message = "rep range should be within 1 to 40 ") int exReps,
+			Collection<String> exPlans, LocalDateTime createdAt, LocalDateTime updatedAt) {
+		super();
+		this.id = id;
+		this.exIdentifier = exIdentifier;
+		this.exType = exType;
+		this.exSets = exSets;
+		this.exReps = exReps;
+		this.exPlans = exPlans;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+	}
+	public Exercise() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "Exercise [id=" + id + ", exIdentifier=" + exIdentifier + ", exType=" + exType + ", exSets=" + exSets
+				+ ", exReps=" + exReps + ", exPlans=" + exPlans + ", createdAt=" + createdAt + ", updatedAt="
+				+ updatedAt + "]";
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }
