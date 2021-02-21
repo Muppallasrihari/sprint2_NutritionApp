@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.cg.healthify.beans.NutritionPlan;
 import com.cg.healthify.exceptions.NutritionIdException;
@@ -17,11 +17,11 @@ import com.cg.healthify.service.NutritionPlanServiceImpl;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class NutritionmoduleApplicationTests {
+public class NutritionPlanServiceTest {
 	@Autowired
 	NutritionPlanServiceImpl nutritionPlanServiceImpl;
 
-	@Mock
+	@MockBean
 	NutritionPlanRepository nutritionPlanRepository;
 
 	@Test
