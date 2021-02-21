@@ -134,6 +134,17 @@ public class WeightLog {
 		return result;
 	}
 
+	
+
+	@Override
+	public String toString() {
+		return "WeightLog [id=" + id + ", weightId=" + weightId + ", weight=" + weight + ", created_At=" + created_At
+				+ ", Updated_At=" + Updated_At + "]";
+	}
+
+
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -170,14 +181,5 @@ public class WeightLog {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "WeightLog [id=" + id + ", weightId=" + weightId + ", weight=" + weight + ", created_At=" + created_At
-				+ ", Updated_At=" + Updated_At + "]";
-	}
-
-
-
-		
+	
 }

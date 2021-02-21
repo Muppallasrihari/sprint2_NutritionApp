@@ -82,12 +82,16 @@ public Iterable<Customer>getAllCustomerDetails(){
 
 /**------------------------------Delete Customer By CustomerIdentifier-------------------------------------**/
 @Override
-public void deleteCustomerById(String customerIdentifier) {
+public int deleteCustomerById(String customerIdentifier) {
+	int res=0;
 	Customer customer=customerRepository.findByCustomerIdentifier(customerIdentifier);
 	if(customer==null) {
 		throw new CustomerException("Id: "+customerIdentifier+" doesn't exists");
+	}else {
+		customerRepository.delete(customer);
+		res=1;
 	}
-	customerRepository.delete(customer);
+	return res;
 }
 }
 /**-------------------------------------------------------------------------------------------------------**/

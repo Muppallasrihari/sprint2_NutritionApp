@@ -39,14 +39,14 @@ public class PaymentServiceImpl implements PaymentService {
 				if (payment.getPaymentGateway().equals("PAYTM")) {
 					payment.setCurrentAmount(customer.getNutritionPlan().getPrice());
 					payment.setDiscount(8.0);
-					Double amt = payment.getCurrentAmount() - (payment.getDiscount() * 10);
+					Double amt = payment.getCurrentAmount() - (payment.getCurrentAmount() *0.08);
 					payment.setActualAmount(amt);
 				} else
 
 				if (payment.getPaymentGateway().equals("UPI")) {
 					payment.setCurrentAmount(customer.getNutritionPlan().getPrice());
 					payment.setDiscount(7.0);
-					Double amt = payment.getCurrentAmount() - (payment.getDiscount() * 10);
+					Double amt = payment.getCurrentAmount() - (payment.getCurrentAmount() *0.07);
 					payment.setActualAmount(amt);
 				}
 			}
@@ -57,13 +57,13 @@ public class PaymentServiceImpl implements PaymentService {
 				if (payment.getPaymentGateway().equals("PAYTM")) {
 					payment.setCurrentAmount(customer.getNutritionPlan().getPrice());
 					payment.setDiscount(10.0);
-					Double amt = payment.getCurrentAmount() - (payment.getDiscount() * 10);
+					Double amt = payment.getCurrentAmount() - (payment.getCurrentAmount() *0.10);
 					payment.setActualAmount(amt);
 				}
 				if (payment.getPaymentGateway().equals("UPI")) {
 					payment.setCurrentAmount(customer.getNutritionPlan().getPrice());
 					payment.setDiscount(15.0);
-					Double amt = payment.getCurrentAmount() - (payment.getDiscount() * 10);
+					Double amt = payment.getCurrentAmount() - (payment.getCurrentAmount() *0.15);
 					payment.setActualAmount(amt);
 				}
 			}

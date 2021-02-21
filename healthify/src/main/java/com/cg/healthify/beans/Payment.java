@@ -129,7 +129,6 @@ public class Payment {
 		int result = 1;
 		result = prime * result + ((actualAmount == null) ? 0 : actualAmount.hashCode());
 		result = prime * result + ((currentAmount == null) ? 0 : currentAmount.hashCode());
-		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
 		result = prime * result + ((discount == null) ? 0 : discount.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((paymentGateway == null) ? 0 : paymentGateway.hashCode());
@@ -157,11 +156,6 @@ public class Payment {
 				return false;
 		} else if (!currentAmount.equals(other.currentAmount))
 			return false;
-		if (customer == null) {
-			if (other.customer != null)
-				return false;
-		} else if (!customer.equals(other.customer))
-			return false;
 		if (discount == null) {
 			if (other.discount != null)
 				return false;
@@ -188,6 +182,18 @@ public class Payment {
 		} else if (!transactionId.equals(other.transactionId))
 			return false;
 		return true;
+	}
+
+	public Payment(Long id, String transactionId, Double currentAmount, Double actualAmount, String paymentIdentifier,
+			@NotBlank(message = "Payment Gateway Reqiured") String paymentGateway, Double discount) {
+		super();
+		this.id = id;
+		this.transactionId = transactionId;
+		this.currentAmount = currentAmount;
+		this.actualAmount = actualAmount;
+		this.paymentIdentifier = paymentIdentifier;
+		this.paymentGateway = paymentGateway;
+		this.discount = discount;
 	}
 
 }

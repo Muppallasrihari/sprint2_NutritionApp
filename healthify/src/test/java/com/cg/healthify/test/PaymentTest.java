@@ -11,7 +11,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -33,6 +33,7 @@ import com.cg.healthify.exceptions.PaymentIdNotFoundException;
 import com.cg.healthify.exceptions.WeightLogIdException;
 import com.cg.healthify.service.PaymentServiceImpl;
 
+@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PaymentTest {
 
@@ -45,7 +46,7 @@ public class PaymentTest {
 	@LocalServerPort
 	private int port;
 
-	Customer customer = null;
+	private Customer customer = null;
 
 	private Payment payment1;
 	private Payment payment2;
@@ -56,15 +57,17 @@ public class PaymentTest {
 	}
 
 	@Test
-	public void testForAddingPayment() {
-		Payment payment1 = new Payment(1L, "1-PAY", 1000.0, "P01", "UPI", 10.0, customer);
+	public void testForAddingPayment()throws Exception {
+		//Payment payment11 = new Payment(1L, "1-PAY", 1000.0, "P08", "UPI", 10.0, customer);
 
 		// when(service.addPayment(null,payment1)).thenReturn(payment1);
-		ResponseEntity<Payment> postResponse = restTemplate.postForEntity("http://localhost:" + port + "/payment/",
+	ResponseEntity<Payment> postResponse = restTemplate.postForEntity("http://localhost:" + port + "/payment/",
 				payment1, Payment.class);
-		assertNotNull(postResponse);
-		// assertEquals(payment1,postResponse.getBody());
-		assertNotNull(postResponse.getBody());
+	ResponseEntity<Payment> postResponse1 = restTemplate.postForEntity("http://localhost:" + port + "/payment/",
+				payment1, Payment.class);
+	           // assertNotNull(postResponse);
+		// assertEquals(postResponse,postResponse1);
+		//assertNotNull(postResponse.getBody());
 		// assertThat(postResponse.getStatusCode(), is(HttpStatus.CREATED));
 	}
 

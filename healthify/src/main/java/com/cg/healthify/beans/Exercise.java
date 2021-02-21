@@ -155,6 +155,7 @@ public class Exercise {
 		result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -197,11 +198,6 @@ public class Exercise {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
 	
 	
 

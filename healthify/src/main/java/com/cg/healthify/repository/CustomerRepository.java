@@ -6,6 +6,5 @@ import com.cg.healthify.beans.Customer;
 
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 	Customer findByCustomerIdentifier(String customerIdentifier);
-
 	Customer findByPaymentIdentifier(String paymentIdentifier);
 }
