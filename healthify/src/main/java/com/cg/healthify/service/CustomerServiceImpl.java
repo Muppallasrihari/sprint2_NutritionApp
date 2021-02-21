@@ -49,12 +49,14 @@ public Customer save(Customer customer) {
 		if(exercise!=null) {
 			 customer.setExercise(exercise); 
 		 }	 
+	
+	return customerRepository.save(customer);
 	}
 /**-----------------------------------------------------------------------------------------------------------------------**/	
 	catch(Exception e) {
 		throw new CustomerException("Error Occured in this ID:"+customer.getCustomerIdentifier());
 	}
-	return customerRepository.save(customer);
+	
 	}
 /**----------------------------------------------------------------------------------------**/
 
