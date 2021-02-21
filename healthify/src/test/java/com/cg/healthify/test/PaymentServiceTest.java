@@ -56,10 +56,10 @@ public class PaymentServiceTest {
 		payment.setTransactionId("1-PAY");
 		payment.setPaymentGateway("UPI");
 
-		when(paymentRepository.findByTransactionId("1-PAY"))
+		when(paymentRepository.findByTransactionId("2-PAY"))
 				.thenThrow(new PaymentIdNotFoundException("Payment ID not found"));
 		// Payment pay = service.findPaymentByTransactionId("2-PAY");
-		assertThrows(PaymentIdNotFoundException.class, () -> service.findPaymentByTransactionId("1-PAY"));
+		assertThrows(PaymentIdNotFoundException.class, () -> service.findPaymentByTransactionId("2-PAY"));
 	}
 
 	@Test

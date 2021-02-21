@@ -30,6 +30,7 @@ public class Payment {
 	}
 
 	private Double actualAmount;
+	@NotBlank(message = "Payment Identifier required")
 	private String paymentIdentifier;
 	@NotBlank(message = "Payment Gateway Reqiured")
 	private String paymentGateway;
