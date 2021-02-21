@@ -17,9 +17,8 @@ public class CustomResponseEntityHandler extends ResponseEntityExceptionHandler 
 	 * -----------------------------------Customer-Exception-Part---------------------------
 	 */
 	@ExceptionHandler
-	public ResponseEntity<Object> handleCustomerNameException(CustomerContactException ex, WebRequest request) {
-		CustomerContactExceptionResponse customerExceptionResponse = new CustomerContactExceptionResponse(
-				ex.getMessage());
+	public ResponseEntity<Object> handleCustomerNameException(CustomerException ex, WebRequest request) {
+		CustomerExceptionResponse customerExceptionResponse = new CustomerExceptionResponse(ex.getMessage());
 		return new ResponseEntity<Object>(customerExceptionResponse, HttpStatus.BAD_REQUEST);
 	}
 
