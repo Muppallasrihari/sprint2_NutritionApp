@@ -45,7 +45,7 @@ public class WeightLogServiceTest {
 
 
 	@Test
-	public void addOrWeightLogMethod()
+	public void addOrUpdateWeightLogMethod()
 	{
 		weightLog=new WeightLog();
 		weightLog.setWeight("12");
