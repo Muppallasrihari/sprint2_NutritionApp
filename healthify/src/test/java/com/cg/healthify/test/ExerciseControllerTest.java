@@ -60,7 +60,7 @@ public class ExerciseControllerTest {
 		assertNotNull(exercise2);
 	}
 	
-	@Test
+	@Test //test
 	public void deleteExerciseByExIdentifier() {
 		Exercise exercise = restTemplate.getForObject(getRootUrl() + "healthify/exercise/CARDIO1", Exercise.class);
 		restTemplate.delete(getRootUrl() + "healthify/exercise/CARDIO1");
