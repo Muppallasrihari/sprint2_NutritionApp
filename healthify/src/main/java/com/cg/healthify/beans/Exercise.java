@@ -1,6 +1,7 @@
 package com.cg.healthify.beans;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -59,10 +60,10 @@ public class Exercise {
 	
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private LocalDateTime createdAt;
+	private LocalDate createdAt;
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private LocalDateTime updatedAt;
+	private LocalDate updatedAt;
 	
 	
 	public String getExIdentifier() {
@@ -94,24 +95,24 @@ public class Exercise {
 	
 	@PrePersist
 	public void onCreate() {
-		this.createdAt = LocalDateTime.now();  
+		this.createdAt = LocalDate.now();  
 	}
 	
 	@PreUpdate
 	public void onUpdate() {
-		this.updatedAt = LocalDateTime.now();
+		this.updatedAt = LocalDate.now();
 	}
 	
-	public LocalDateTime getCreatedAt() {
+	public LocalDate getCreatedAt() {
 		return createdAt;
 	}
-	public void setCreatedAt(LocalDateTime createdAt) {
+	public void setCreatedAt(LocalDate createdAt) {
 		this.createdAt = createdAt;
 	}
-	public LocalDateTime getUpdatedAt() {
+	public LocalDate getUpdatedAt() {
 		return updatedAt;
 	}
-	public void setUpdatedAt(LocalDateTime updatedAt) {
+	public void setUpdatedAt(LocalDate updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 	public Exercise(int id,
@@ -119,7 +120,7 @@ public class Exercise {
 			@NotBlank String exType,
 			@NotNull @Range(min = 1, max = 10, message = "set range should be within 1 to 10 ") int exSets,
 			@NotNull @Range(min = 1, max = 40, message = "rep range should be within 1 to 40 ") int exReps,
-			Collection<String> exPlans, LocalDateTime createdAt, LocalDateTime updatedAt) {
+			Collection<String> exPlans, LocalDate createdAt, LocalDate updatedAt) {
 		super();
 		this.id = id;
 		this.exIdentifier = exIdentifier;
@@ -138,6 +139,62 @@ public class Exercise {
 		return "Exercise [id=" + id + ", exIdentifier=" + exIdentifier + ", exType=" + exType + ", exSets=" + exSets
 				+ ", exReps=" + exReps + ", exPlans=" + exPlans + ", createdAt=" + createdAt + ", updatedAt="
 				+ updatedAt + "]";
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
+		result = prime * result + ((exIdentifier == null) ? 0 : exIdentifier.hashCode());
+		result = prime * result + ((exPlans == null) ? 0 : exPlans.hashCode());
+		result = prime * result + exReps;
+		result = prime * result + exSets;
+		result = prime * result + ((exType == null) ? 0 : exType.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Exercise other = (Exercise) obj;
+		if (createdAt == null) {
+			if (other.createdAt != null)
+				return false;
+		} else if (!createdAt.equals(other.createdAt))
+			return false;
+		if (exIdentifier == null) {
+			if (other.exIdentifier != null)
+				return false;
+		} else if (!exIdentifier.equals(other.exIdentifier))
+			return false;
+		if (exPlans == null) {
+			if (other.exPlans != null)
+				return false;
+		} else if (!exPlans.equals(other.exPlans))
+			return false;
+		if (exReps != other.exReps)
+			return false;
+		if (exSets != other.exSets)
+			return false;
+		if (exType == null) {
+			if (other.exType != null)
+				return false;
+		} else if (!exType.equals(other.exType))
+			return false;
+		if (id != other.id)
+			return false;
+		if (updatedAt == null) {
+			if (other.updatedAt != null)
+				return false;
+		} else if (!updatedAt.equals(other.updatedAt))
+			return false;
+		return true;
 	}
 	
 	
