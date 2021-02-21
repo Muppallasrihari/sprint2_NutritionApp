@@ -2,7 +2,6 @@ package com.cg.healthify.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.cg.healthify.beans.NutritionPlan;
 import com.cg.healthify.exceptions.NutritionIdException;
 import com.cg.healthify.repository.NutritionPlanRepository;
@@ -40,11 +39,16 @@ public class NutritionPlanServiceImpl implements NutritionPlanService {
 	}
 
 	@Override
-	public void deleteNutritionPlanById(String planId) {
+	public int deleteNutritionPlanById(String planId) {
+		int status=0;
 		NutritionPlan nutritionPlan = nutritionRepository.findByPlanId(planId.toUpperCase());
 		if (nutritionPlan == null) {
 			throw new NutritionIdException("Nutrition Plan with Id---" + planId.toUpperCase() + " ---does not exists.");
 		}
-		nutritionRepository.delete(nutritionPlan);
+		else {
+			nutritionRepository.delete(nutritionPlan);
+			status=1;
+		}
+		return status;
 	}
 }

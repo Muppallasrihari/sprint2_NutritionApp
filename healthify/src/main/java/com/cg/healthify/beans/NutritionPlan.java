@@ -1,7 +1,6 @@
 package com.cg.healthify.beans;
 
-import java.time.LocalDateTime;
-
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,9 +26,9 @@ public class NutritionPlan {
 	@NotBlank(message = "Nutrition Plan Description is required.")
 	private String description;
 	@JsonFormat
-	private LocalDateTime createdAt;
+	private LocalDate createdAt;
 	@JsonFormat
-	private LocalDateTime updatedAt;
+	private LocalDate updatedAt;
 	@NotNull(message = "Nutrition Plan Price is required.")
 	@Min(value = 0)
 	private double price;
@@ -41,8 +40,8 @@ public class NutritionPlan {
 
 	public NutritionPlan(Long id, @NotBlank(message = "Nutrition Plan Id is required.") String planId,
 			@NotBlank(message = "Nutrition Plan Name is required.") String name,
-			@NotBlank(message = "Nutrition Plan Description is required.") String description, LocalDateTime createdAt,
-			LocalDateTime updatedAt, @NotNull(message = "Nutrition Plan Price is required.") @Min(0) double price) {
+			@NotBlank(message = "Nutrition Plan Description is required.") String description, LocalDate createdAt,
+			LocalDate updatedAt, @NotNull(message = "Nutrition Plan Price is required.") @Min(0) double price) {
 		super();
 		this.id = id;
 		this.planId = planId;
@@ -86,19 +85,19 @@ public class NutritionPlan {
 		this.description = description;
 	}
 
-	public LocalDateTime getCreatedAt() {
+	public LocalDate getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(LocalDateTime createdAt) {
+	public void setCreatedAt(LocalDate createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public LocalDateTime getUpdatedAt() {
+	public LocalDate getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(LocalDateTime updatedAt) {
+	public void setUpdatedAt(LocalDate updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
@@ -112,13 +111,77 @@ public class NutritionPlan {
 
 	@PrePersist
 	public void onCreate() {
-		this.createdAt = LocalDateTime.now();
+		this.createdAt = LocalDate.now();
 
 	}
 
 	@PreUpdate
 	public void onUpdate() {
-		this.updatedAt = LocalDateTime.now();
+		this.updatedAt = LocalDate.now();
+	}
+	
+	
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((planId == null) ? 0 : planId.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(price);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		NutritionPlan other = (NutritionPlan) obj;
+		if (createdAt == null) {
+			if (other.createdAt != null)
+				return false;
+		} else if (!createdAt.equals(other.createdAt))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (planId == null) {
+			if (other.planId != null)
+				return false;
+		} else if (!planId.equals(other.planId))
+			return false;
+		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
+			return false;
+		if (updatedAt == null) {
+			if (other.updatedAt != null)
+				return false;
+		} else if (!updatedAt.equals(other.updatedAt))
+			return false;
+		return true;
 	}
 
 
