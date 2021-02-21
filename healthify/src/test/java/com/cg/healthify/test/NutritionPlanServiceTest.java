@@ -1,17 +1,16 @@
+package com.cg.healthify.test;
 
-  package com.cg.healthify.test;
- 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.cg.healthify.beans.NutritionPlan;
-import com.cg.healthify.exceptions.NutritionIdException;
 import com.cg.healthify.repository.NutritionPlanRepository;
 import com.cg.healthify.service.NutritionPlanServiceImpl;
 
@@ -23,6 +22,8 @@ public class NutritionPlanServiceTest {
 
 	@MockBean
 	NutritionPlanRepository nutritionPlanRepository;
+
+	
 
 	@Test
 	public void getNutritionPlanByIdForValidPlanId() {
@@ -36,7 +37,7 @@ public class NutritionPlanServiceTest {
 
 	}
 
-	@Test(expected=NutritionIdException.class)
+	@Test
 	public void getNutritionPlanByIdForInvalidPlanId(){
 		NutritionPlan nutritionPlan = new NutritionPlan();
 		nutritionPlan.setPlanId("SILVER");
@@ -48,13 +49,13 @@ public class NutritionPlanServiceTest {
 		assertEquals(nutritionPlan,plan);
 
 	}
-
+	
 	@Test
 	public void createNutritionPlanForValidInput() {
 		NutritionPlan nutritionPlan = new NutritionPlan();
-		nutritionPlan.setPlanId("Silver");
-		nutritionPlan.setDescription("It is a 60 days plan");
-		nutritionPlan.setPrice(20000);
+		nutritionPlan.setPlanId("SILVER");
+		nutritionPlan.setDescription("It is a 30 days plan");
+		nutritionPlan.setPrice(10000);
 		when(nutritionPlanRepository.save(nutritionPlan)).thenReturn(nutritionPlan);
 		assertEquals( nutritionPlan,nutritionPlanServiceImpl.addOrUpdate(nutritionPlan));
 
@@ -62,4 +63,3 @@ public class NutritionPlanServiceTest {
 	
 
 	}
-

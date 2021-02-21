@@ -56,7 +56,7 @@ public class WeightLogServiceImpl implements WeightLogService{
 	 * Delete by weightID
 	 * @param weightId
 	 */
-	public  WeightLog deleteWeightLogById(String weightId) {
+	public  void deleteWeightLogById(String weightId) {
 
 		WeightLog weightLog=weightLogRepository.findByWeightId(weightId.toUpperCase());
 		if(weightLog==null)
@@ -64,7 +64,6 @@ public class WeightLogServiceImpl implements WeightLogService{
 			throw new WeightLogIdException(weightId+" is not valid id. Please give correct Id.");
 		}
 		weightLogRepository.delete(weightLog);
-		return weightLog;
 
 	}
 

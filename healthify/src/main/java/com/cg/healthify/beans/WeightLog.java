@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class WeightLog {
 
 	
-
 	public WeightLog() {
 		super();
 	}
@@ -176,4 +175,5 @@ public class WeightLog {
 		return "WeightLog [id=" + id + ", weightId=" + weightId + ", weight=" + weight + ", created_At=" + created_At
 				+ ", Updated_At=" + Updated_At + "]";
 	}
+
 }

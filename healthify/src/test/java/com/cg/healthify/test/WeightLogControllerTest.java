@@ -75,7 +75,7 @@ public class WeightLogControllerTest {
 		weightLog.add(weightLogmock1);
 		weightLog.add(weightLogmock2);
 		when(weightLogServiceImpl.getAllWeightLog()).thenReturn(weightLog);
-		ResponseEntity<WeightLog> getResponse=restTemplate.postForEntity("http://localhost:"+port+"//getAllWeightLogDetails",weightLogmock1,WeightLog.class);
+		ResponseEntity<WeightLog> getResponse=restTemplate.postForEntity("http://localhost:"+port+"//getAllWeightLog",weightLogmock1,WeightLog.class);
 		assertNotNull(getResponse);
 
 	}
