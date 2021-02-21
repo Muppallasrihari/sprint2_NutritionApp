@@ -10,7 +10,7 @@ public interface WeightLogService {
 
 	public WeightLog addOrUpdateWeightLog(WeightLog weightLog);
 	public Iterable<WeightLog> getAllWeightLog();
-	public  void deleteWeightLogById(String weightId);
+	public  WeightLog deleteWeightLogById(String weightId);
 	public WeightLog getWeightLogById(String weightId);
 	public WeightLog updateWeightLog(String weightId, WeightLog weightLog);
 }

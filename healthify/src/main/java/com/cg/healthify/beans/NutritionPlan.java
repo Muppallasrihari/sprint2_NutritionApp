@@ -140,6 +140,13 @@ public class NutritionPlan {
 	}
 
 
+	
+	@Override
+	public String toString() {
+		return "NutritionPlan [id=" + id + ", planId=" + planId + ", name=" + name + ", description=" + description
+				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", price=" + price + "]";
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -183,15 +190,8 @@ public class NutritionPlan {
 			return false;
 		return true;
 	}
+	
+	
 
-
-	@Override
-	public String toString() {
-		return "NutritionPlan [id=" + id + ", planId=" + planId + ", name=" + name + ", description=" + description
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", price=" + price + "]";
-	}
-
-
-		
 
 }

@@ -11,6 +11,6 @@ public interface CustomerService {
 	
 	public Iterable<Customer>getAllCustomerDetails();
 	
-	public void deleteCustomerById(String customerIdentifier);
+	public int deleteCustomerById(String customerIdentifier);
 
 }

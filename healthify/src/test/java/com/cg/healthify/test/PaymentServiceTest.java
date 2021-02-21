@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import com.cg.healthify.beans.Customer;
 import com.cg.healthify.beans.Payment;
 import com.cg.healthify.exceptions.PaymentIdNotFoundException;
 import com.cg.healthify.repository.PaymentRepository;
@@ -35,7 +36,6 @@ public class PaymentServiceTest {
 	}
 
 	Payment payment, payment1, payment2;
-
 	
 	@Test
 	public void findPaymentByTransactionId() {
