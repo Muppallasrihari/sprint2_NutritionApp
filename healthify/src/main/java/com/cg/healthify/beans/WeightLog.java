@@ -121,7 +121,7 @@ public class WeightLog {
 	public void onUpdate() {
 		this.Updated_At = LocalDateTime.now();
 	}
-]
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -179,53 +179,5 @@ public class WeightLog {
 
 
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((Updated_At == null) ? 0 : Updated_At.hashCode());
-		result = prime * result + ((created_At == null) ? 0 : created_At.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((weight == null) ? 0 : weight.hashCode());
-		result = prime * result + ((weightId == null) ? 0 : weightId.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		WeightLog other = (WeightLog) obj;
-		if (Updated_At == null) {
-			if (other.Updated_At != null)
-				return false;
-		} else if (!Updated_At.equals(other.Updated_At))
-			return false;
-		if (created_At == null) {
-			if (other.created_At != null)
-				return false;
-		} else if (!created_At.equals(other.created_At))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (weight == null) {
-			if (other.weight != null)
-				return false;
-		} else if (!weight.equals(other.weight))
-			return false;
-		if (weightId == null) {
-			if (other.weightId != null)
-				return false;
-		} else if (!weightId.equals(other.weightId))
-			return false;
-		return true;
-	}
-	
+		
 }
