@@ -21,6 +21,7 @@ public class PaymentServiceImpl implements PaymentService {
 	Integer PTSsequence = 0;
 	String paymentTransactionId;
 
+	
 	@Override
 	public Payment addPayment(String paymentIdentifier, Payment payment) {
 		// Double f=Customer.this.getNutritionPlan().getPrice();

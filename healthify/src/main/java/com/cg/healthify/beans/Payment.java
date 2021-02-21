@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Payment {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -122,6 +121,73 @@ public class Payment {
 		return "Payment [id=" + id + ", transactionId=" + transactionId + ", actualAmount=" + actualAmount
 				+ ", paymentIdentifier=" + paymentIdentifier + ", paymentGateway=" + paymentGateway + ", discount="
 				+ discount + ", customer=" + customer + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((actualAmount == null) ? 0 : actualAmount.hashCode());
+		result = prime * result + ((currentAmount == null) ? 0 : currentAmount.hashCode());
+		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
+		result = prime * result + ((discount == null) ? 0 : discount.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((paymentGateway == null) ? 0 : paymentGateway.hashCode());
+		result = prime * result + ((paymentIdentifier == null) ? 0 : paymentIdentifier.hashCode());
+		result = prime * result + ((transactionId == null) ? 0 : transactionId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Payment other = (Payment) obj;
+		if (actualAmount == null) {
+			if (other.actualAmount != null)
+				return false;
+		} else if (!actualAmount.equals(other.actualAmount))
+			return false;
+		if (currentAmount == null) {
+			if (other.currentAmount != null)
+				return false;
+		} else if (!currentAmount.equals(other.currentAmount))
+			return false;
+		if (customer == null) {
+			if (other.customer != null)
+				return false;
+		} else if (!customer.equals(other.customer))
+			return false;
+		if (discount == null) {
+			if (other.discount != null)
+				return false;
+		} else if (!discount.equals(other.discount))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (paymentGateway == null) {
+			if (other.paymentGateway != null)
+				return false;
+		} else if (!paymentGateway.equals(other.paymentGateway))
+			return false;
+		if (paymentIdentifier == null) {
+			if (other.paymentIdentifier != null)
+				return false;
+		} else if (!paymentIdentifier.equals(other.paymentIdentifier))
+			return false;
+		if (transactionId == null) {
+			if (other.transactionId != null)
+				return false;
+		} else if (!transactionId.equals(other.transactionId))
+			return false;
+		return true;
 	}
 
 }

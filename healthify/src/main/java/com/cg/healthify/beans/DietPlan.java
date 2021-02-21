@@ -61,5 +61,61 @@ public Double getProteinRatio() {
 public void setProteinRatio(Double proteinRatio) {
 	this.proteinRatio = proteinRatio;
 }
+public DietPlan(Long id, @NotBlank(message = "Food Type Reqiured") String foodType, Double fatRatio, Double carbsRatio,
+		Double proteinRatio) {
+	super();
+	this.id = id;
+	this.foodType = foodType;
+	this.fatRatio = fatRatio;
+	this.carbsRatio = carbsRatio;
+	this.proteinRatio = proteinRatio;
+}
+@Override
+public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((carbsRatio == null) ? 0 : carbsRatio.hashCode());
+	result = prime * result + ((fatRatio == null) ? 0 : fatRatio.hashCode());
+	result = prime * result + ((foodType == null) ? 0 : foodType.hashCode());
+	result = prime * result + ((id == null) ? 0 : id.hashCode());
+	result = prime * result + ((proteinRatio == null) ? 0 : proteinRatio.hashCode());
+	return result;
+}
+@Override
+public boolean equals(Object obj) {
+	if (this == obj)
+		return true;
+	if (obj == null)
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	DietPlan other = (DietPlan) obj;
+	if (carbsRatio == null) {
+		if (other.carbsRatio != null)
+			return false;
+	} else if (!carbsRatio.equals(other.carbsRatio))
+		return false;
+	if (fatRatio == null) {
+		if (other.fatRatio != null)
+			return false;
+	} else if (!fatRatio.equals(other.fatRatio))
+		return false;
+	if (foodType == null) {
+		if (other.foodType != null)
+			return false;
+	} else if (!foodType.equals(other.foodType))
+		return false;
+	if (id == null) {
+		if (other.id != null)
+			return false;
+	} else if (!id.equals(other.id))
+		return false;
+	if (proteinRatio == null) {
+		if (other.proteinRatio != null)
+			return false;
+	} else if (!proteinRatio.equals(other.proteinRatio))
+		return false;
+	return true;
+}
 
 }

@@ -102,6 +102,7 @@ public class Exercise {
 	public void onUpdate() {
 		this.updatedAt = LocalDate.now();
 	}
+
 	
 	public LocalDate getCreatedAt() {
 		return createdAt;
@@ -203,5 +204,56 @@ public class Exercise {
 	
 	
 	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((created_At == null) ? 0 : created_At.hashCode());
+		result = prime * result + ((exIdentifier == null) ? 0 : exIdentifier.hashCode());
+		result = prime * result + ((exPlans == null) ? 0 : exPlans.hashCode());
+		result = prime * result + exReps;
+		result = prime * result + exSets;
+		result = prime * result + id;
+		result = prime * result + ((updated_At == null) ? 0 : updated_At.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Exercise other = (Exercise) obj;
+		if (created_At == null) {
+			if (other.created_At != null)
+				return false;
+		} else if (!created_At.equals(other.created_At))
+			return false;
+		if (exIdentifier == null) {
+			if (other.exIdentifier != null)
+				return false;
+		} else if (!exIdentifier.equals(other.exIdentifier))
+			return false;
+		if (exPlans == null) {
+			if (other.exPlans != null)
+				return false;
+		} else if (!exPlans.equals(other.exPlans))
+			return false;
+		if (exReps != other.exReps)
+			return false;
+		if (exSets != other.exSets)
+			return false;
+		if (id != other.id)
+			return false;
+		if (updated_At == null) {
+			if (other.updated_At != null)
+				return false;
+		} else if (!updated_At.equals(other.updated_At))
+			return false;
+		return true;
+	}
 
 }

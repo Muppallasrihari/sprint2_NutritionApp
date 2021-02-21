@@ -52,6 +52,7 @@ public class ExerciseControllerTest {
 				Exercise.class);
 		assertNotNull(postResponse);
 		assertNotNull(postResponse.getBody());
+		assertEquals(exercise,postResponse.getBody());
 	}
 	
 	@Test 
