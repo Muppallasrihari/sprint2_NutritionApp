@@ -17,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.cg.healthify.beans.Payment;
 import com.cg.healthify.beans.WeightLog;
+import com.cg.healthify.exceptions.CustomerException;
 import com.cg.healthify.beans.CaloriesLog;
 import com.cg.healthify.beans.Customer;
 import com.cg.healthify.beans.DietPlan;
@@ -46,66 +47,99 @@ public class CustomerModuleTests {
 	private List<WeightLog> weightLog=new ArrayList<>();
 	private Exercise exercise=null;
 	private CaloriesLog calories =null;
-	
-	
+
 	private String getRootUrl()
 	{
 		return "http://localhost:" + port;
 	}
 	@Autowired
 	private TestRestTemplate restTemplate;
-	
+
+/**------------------------------------ADD CUSTOMER TEST CASES--------------------------------------------**/	
 	@SuppressWarnings("deprecation")
 	@Test
 	public void addCustomer() throws Exception {
 		LocalDate date = LocalDate.of(2020, 02, 1);
 		LocalDate date1 = LocalDate.of(2020, 02, 2);	
 		Customer cust=new Customer(17L,"1111122333","Asmita Singh","Female","C013","P013","GOLD","VEG",0,dietPlan,nutritionPlan,payment,exercise,weightLog,calories,date,date1);
-	ResponseEntity<Customer> postResponse = restTemplate.postForEntity(getRootUrl() + "/api/customer", cust,
-			Customer.class);
-	assertNotNull(postResponse);
-	assertThat(postResponse.getStatusCode(), is(HttpStatus.OK));
+		ResponseEntity<Customer> postResponse = restTemplate.postForEntity(getRootUrl() + "/api/customer", cust,
+				Customer.class);
+		assertNotNull(postResponse);
+		assertThat(postResponse.getStatusCode(), is(HttpStatus.OK));
 	}
-	
+/*------------------------------------------EXCEPTION---------------------------------------------*/	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void addCustomerException() throws CustomerException {
+		LocalDate date = LocalDate.of(2020, 02, 1);
+		LocalDate date1 = LocalDate.of(2020, 02, 2);	
+		Customer cust=new Customer(2L,"1234567890","Asmita Singh","Female","C01","P01","GOLD","VEG",0,dietPlan,nutritionPlan,payment,exercise,weightLog,calories,date,date1);
+		ResponseEntity<Customer> postResponse = restTemplate.postForEntity(getRootUrl() + "/api/customer", cust,
+				Customer.class);
+		assertThat(postResponse.getStatusCode(), is(HttpStatus.BAD_REQUEST));
+	}
+/**--------------------------------------------------------------------------------------------------**/	
+
+
+/**-------------------------------------FIND CUSTOMER TEST CASES-------------------------------------**/	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void findCustomerById() {
+		LocalDate date = LocalDate.of(2020, 02, 1);
+		LocalDate date1 = LocalDate.of(2020, 02, 2);	
+		Customer cust=new Customer(2L,"1234563391","Asmita Singh","Female","C03","P03","GOLD","VEG",0,dietPlan,nutritionPlan,payment,exercise,weightLog,calories,date,date1);
+		ResponseEntity<Customer> postResponse = restTemplate.postForEntity(getRootUrl() + "/api/customer", cust,
+				Customer.class);
+		ResponseEntity<Customer> postResponse1 = restTemplate.getForEntity(getRootUrl() + "/api/customer/C03",Customer.class);
+		assertEquals(postResponse,postResponse1);
+	}
+/*-----------------------------------------------EXCEPTION--------------------------------------------*/	
+
+	@SuppressWarnings("deprecation")
+	@Test
+	public void findCustomerByIdException() throws CustomerException {
+		LocalDate date = LocalDate.of(2020, 02, 1);
+		LocalDate date1 = LocalDate.of(2020, 02, 2);
+		Customer cust=new Customer(2L,"1234563391","Asmita Singh","Female","C03","P03","GOLD","VEG",0,dietPlan,nutritionPlan,payment,exercise,weightLog,calories,date,date1);	
+		ResponseEntity<Customer> postResponse = restTemplate.getForEntity(getRootUrl() + "/api/customer/C0101",Customer.class);
+		assertThat(postResponse.getStatusCode(), is(HttpStatus.BAD_REQUEST));
+	}
+/**--------------------------------------------------------------------------------------------------**/
+
+
+/**-----------------------------------------UPDATE CUSTOMER TEST CASE--------------------------------**/	
 	@Test
 	public void UpdateCustomer() throws Exception {
 		LocalDate date = LocalDate.of(2020, 02, 1);
 		LocalDate date1 = LocalDate.of(2020, 02, 2);	
-	Customer cust=new Customer(1L,"9454112394","Raghav Singh",null,null,null,null,null,0,dietPlan,nutritionPlan,payment,date,date1);
-	Customer cust1=new Customer(1L,"1234567890","Raghav Singh",null,null,null,null,null,0,dietPlan,nutritionPlan,payment,date,date1);
-	ResponseEntity<Customer> postResponse = restTemplate.postForEntity(getRootUrl() + "/api/customer", cust,
-			Customer.class);
-	ResponseEntity<Customer> postResponse1 = restTemplate.postForEntity(getRootUrl() + "/api/customer", cust1,
-			Customer.class);
-	assertEquals(postResponse,postResponse1);
-	
+		Customer cust=new Customer(1L,"9454112394","Raghav Singh",null,null,null,null,null,0,dietPlan,nutritionPlan,payment,date,date1);
+		Customer cust1=new Customer(1L,"1234567890","Raghav Singh",null,null,null,null,null,0,dietPlan,nutritionPlan,payment,date,date1);
+		ResponseEntity<Customer> postResponse = restTemplate.postForEntity(getRootUrl() + "/api/customer", cust,
+				Customer.class);
+		ResponseEntity<Customer> postResponse1 = restTemplate.postForEntity(getRootUrl() + "/api/customer", cust1,
+				Customer.class);
+		assertEquals(postResponse,postResponse1);	
 	}
-	
-	
-@Test
-public void findCustomerById() {
-	LocalDate date = LocalDate.of(2020, 02, 1);
-	LocalDate date1 = LocalDate.of(2020, 02, 2);	
-Customer cust=new Customer(2L,"1234563391","Asmita Singh","Female","C03","P03","GOLD","VEG",0,dietPlan,nutritionPlan,payment,exercise,weightLog,calories,date,date1);
-ResponseEntity<Customer> postResponse = restTemplate.postForEntity(getRootUrl() + "/api/customer", cust,
-		Customer.class);
-ResponseEntity<Customer> postResponse1 = restTemplate.getForEntity(getRootUrl() + "/api/customer/C03",Customer.class);
-assertEquals(postResponse,postResponse1);
+/**--------------------------------------------------------------------------------------------------**/	
 
-}
-	
+
+
+/**-----------------------------------------DELETE CUSTOMER TEST CASES------------------------------**/	
+	@SuppressWarnings("deprecation")
 	@Test
-	public void deleteCustomerPositive() {
-		   ResponseEntity<Customer> postResponse1 = restTemplate.getForEntity(getRootUrl() + "/api/customer/C09",Customer.class);
-	       int n=postResponse1.getStatusCodeValue();
-	     assertEquals(200,n);
-	     restTemplate.delete(getRootUrl() + "/api/customer/C09");
+	public void deleteCustomer() {
+		ResponseEntity<Customer> postResponse1 = restTemplate.getForEntity(getRootUrl() + "/api/customer/C09",Customer.class);
+		int n=postResponse1.getStatusCodeValue();
+		assertEquals(200,n);
+		restTemplate.delete(getRootUrl() + "/api/customer/C09");
 	}
+/*--------------------------------------------EXCEPTION---------------------------------------------------*/
+	@SuppressWarnings("deprecation")
 	@Test
-	public void deleteCustomerNegative() {
-		   ResponseEntity<Customer> postResponse1 = restTemplate.getForEntity(getRootUrl() + "/api/customer/C08",Customer.class);
-	       int n=postResponse1.getStatusCodeValue();
-	     assertEquals(400,n);
-	     restTemplate.delete(getRootUrl() + "/api/customer/C08");
+	public void DeleteCustomerByIdException() throws CustomerException {	
+		ResponseEntity<Customer> postResponse = restTemplate.getForEntity(getRootUrl() + "/api/customer/C0101",Customer.class);
+		int actual=postResponse.getStatusCodeValue();
+		assertEquals(400,actual);
 	}
+/**-------------------------------------------------------------------------------------------------**/	
 }

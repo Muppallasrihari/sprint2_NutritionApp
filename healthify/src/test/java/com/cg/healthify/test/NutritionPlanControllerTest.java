@@ -47,13 +47,15 @@ public class NutritionPlanControllerTest {
 
 	@Test
 	public void deleteNutritionPlanForValidId() {
-		NutritionPlan plan = new NutritionPlan();
+		
 		nutritionPlanMock1 = new NutritionPlan(1L, "SILVER", "Silver Plan", "It is a 30 days plan", date, date1,
 				10000.0);
+		NutritionPlan nutritionPlan = restTemplate.getForObject(getRootUrl() + "/nutritionplan/SILVER",
+				NutritionPlan.class);
 		restTemplate.delete(getRootUrl() + "/nutritionplan/SILVER");
 		NutritionPlan nutritionPlan1 = restTemplate.getForObject(getRootUrl() + "/nutritionplan/SILVER",
 				NutritionPlan.class);
-		assertEquals(nutritionPlan1, plan);
+		assertEquals(nutritionPlan1, nutritionPlan);
 
 	}
 
