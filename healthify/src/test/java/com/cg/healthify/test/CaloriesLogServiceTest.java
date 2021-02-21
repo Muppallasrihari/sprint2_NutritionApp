@@ -36,7 +36,7 @@ public class CaloriesLogServiceTest {
 	private LocalDateTime date;
 	
 	@Test
-	public void addCaloriesTestLogShouldSaveOrUpdateCaloriesLog() {
+	public void addCaloriesTestLogShouldSaveOrUpdateCaloriesLog() {   //add caloriesLog test
 		
 		CaloriesLog caloriesLog = new CaloriesLog((long) 2, 11,"cl89",date,date);
 		when(caloriesLogRepository.save(caloriesLog)).thenReturn(caloriesLog);

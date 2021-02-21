@@ -26,9 +26,9 @@ public interface CaloriesLogService {
 	 * @return
 	 */
 	CaloriesLog deleteCaloriesLogByIdentifier(String caloriesLogIdentifier);
-
+ 
 	/**
-	 * Find All CaloriesLog
+	 *  Find All CaloriesLog
 	 * @return
 	 */
 	Iterable<CaloriesLog> showAllCaloriesLog();

@@ -56,7 +56,7 @@ public class CaloriesLogControllerTest {
 	public void addCaloriesLogTest()
 	{
 		when(caloriesLogServiceImpl.addCaloriesLog(caloriesLogmock1)).thenReturn(caloriesLogmock1);
-		ResponseEntity<CaloriesLog> responseEntity =restTemplate.postForEntity("http://localhost:"+port+"/api/CaloriesLog",caloriesLogmock1,CaloriesLog.class);
+		ResponseEntity<CaloriesLog> responseEntity =restTemplate.postForEntity("http://localhost:"+port+"/CaloriesLog",caloriesLogmock1,CaloriesLog.class);
 		assertNotNull(responseEntity);
 		assertNotNull(responseEntity.getBody());
 	}
@@ -65,7 +65,7 @@ public class CaloriesLogControllerTest {
 	public void findCaloriesLogByIdentifierForTest() {
 
 		when(caloriesLogServiceImpl.findCaloriesLogByIdentifier("cl94")).thenReturn(caloriesLogmock1);
-		ResponseEntity<CaloriesLog> responseEntity=restTemplate.getForEntity("http://localhost:"+port+"/{CaloriesLogIdentifier}",CaloriesLog.class,"cl94");
+		ResponseEntity<CaloriesLog> responseEntity=restTemplate.getForEntity("http://localhost:"+port+"/{caloriesLogIdentifier}",CaloriesLog.class,"cl94");
 		assertNotNull(responseEntity.getBody());
 		assertNotEquals(caloriesLogmock1,responseEntity.getBody());
 		assertThat(responseEntity.getStatusCode());
@@ -77,7 +77,7 @@ public class CaloriesLogControllerTest {
 	{
 
 		when(caloriesLogServiceImpl.addCaloriesLog(caloriesLogmock2)).thenThrow(new CaloriesLogIdException("Id already exists"));
-		ResponseEntity<CaloriesLog> responseEntity=restTemplate.postForEntity("http://localhost:"+port+"/api/CaloriesLog",caloriesLogmock1,CaloriesLog.class);
+		ResponseEntity<CaloriesLog> responseEntity=restTemplate.postForEntity("http://localhost:"+port+"/caloriesLog",caloriesLogmock1,CaloriesLog.class);
 		assertNotNull(responseEntity);
 		assertNotNull(ResponseEntity.badRequest());
 	}
@@ -89,7 +89,7 @@ public class CaloriesLogControllerTest {
 		caloriesLog.add(caloriesLogmock1);
 		caloriesLog.add(caloriesLogmock2);
 		when(caloriesLogServiceImpl.showAllCaloriesLog()).thenReturn(caloriesLog);
-		ResponseEntity<CaloriesLog> responseEntity=restTemplate.postForEntity("http://localhost:"+port+"/api/CaloriesLog",caloriesLogmock1,CaloriesLog.class);
+		ResponseEntity<CaloriesLog> responseEntity=restTemplate.postForEntity("http://localhost:"+port+"/all",caloriesLogmock1,CaloriesLog.class);
 		assertNotNull(responseEntity);
 
 	}
