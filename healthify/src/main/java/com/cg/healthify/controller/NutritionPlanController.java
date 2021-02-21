@@ -17,44 +17,39 @@ import com.cg.healthify.beans.NutritionPlan;
 import com.cg.healthify.service.MapValidationErrorService;
 import com.cg.healthify.service.NutritionPlanService;
 
-
-
-
 @RestController
 public class NutritionPlanController {
 	@Autowired
 	private NutritionPlanService nutritionPlanService;
 	@Autowired
 	private MapValidationErrorService mapValidationErrorService;
-	
+
 	@PostMapping("/nutritionplan")
 	public ResponseEntity<?> addNutritionPlan(@Valid @RequestBody NutritionPlan nutritionPlan, BindingResult result) {
-		
-		ResponseEntity<?> errorMap=mapValidationErrorService.mapValidationError(result);
-		if(errorMap!=null) {
+
+		ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
+		if (errorMap != null) {
 			return errorMap;
 		}
-		NutritionPlan plan=nutritionPlanService.addOrUpdate(nutritionPlan);
-		return new ResponseEntity<NutritionPlan>(plan,HttpStatus.OK);
+		NutritionPlan plan = nutritionPlanService.addOrUpdate(nutritionPlan);
+		return new ResponseEntity<NutritionPlan>(plan, HttpStatus.OK);
 	}
-	
-	
+
 	@GetMapping("/nutritionplan/{planId}")
-	public ResponseEntity<NutritionPlan> getNutritionPlanById(@PathVariable String planId){
-		NutritionPlan nutritionPlan=nutritionPlanService.getNutritionPlanById(planId);
-		return new ResponseEntity<NutritionPlan>(nutritionPlan,HttpStatus.OK);
+	public ResponseEntity<NutritionPlan> getNutritionPlanById(@PathVariable String planId) {
+		NutritionPlan nutritionPlan = nutritionPlanService.getNutritionPlanById(planId);
+		return new ResponseEntity<NutritionPlan>(nutritionPlan, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/allnutritionplans")
-	public Iterable<NutritionPlan> getAllNutritionPlans(){
+	public Iterable<NutritionPlan> getAllNutritionPlans() {
 		return nutritionPlanService.getAllNutritionPlans();
 	}
-	
+
 	@DeleteMapping("/nutritionplan/{planId}")
 	public ResponseEntity<?> deleteNutritionPlanById(@PathVariable String planId) {
 		nutritionPlanService.deleteNutritionPlanById(planId);
-		return new ResponseEntity<String>("Nutrition Plan with Id "+planId+" deleted successfully", HttpStatus.OK);
+		return new ResponseEntity<String>("Nutrition Plan with Id " + planId + " deleted successfully", HttpStatus.OK);
 	}
-	
 
 }
