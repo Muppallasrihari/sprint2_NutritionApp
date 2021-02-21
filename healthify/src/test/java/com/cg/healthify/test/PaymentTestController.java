@@ -95,7 +95,7 @@ class PaymentTestController {
 	}
 
 	
-/*
+
 	@Test
 	public void testfindAllPayments() {
 		List<Payment> payment = new ArrayList<>();
@@ -120,14 +120,6 @@ class PaymentTestController {
 
 	}
 
-	/*
-	 * @Test public void deletePaymentById() { Payment payment1=
-	 * restTemplate.getForObject("http://localhost:"+port+ "/1-PAY", Payment.class);
-	 * restTemplate.delete("http://localhost:"+port+"/1-PAY"); Payment payment2 =
-	 * restTemplate.getForObject("http://localhost:"+port + "/1-PAY",
-	 * Payment.class); assertNotEquals(payment1,payment2); }
-	 */
-	
 /*	
 	@Test
 	public void deletePaymentForValidId() {
