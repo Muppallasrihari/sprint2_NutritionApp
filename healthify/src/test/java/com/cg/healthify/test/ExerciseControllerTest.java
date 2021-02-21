@@ -69,7 +69,7 @@ public class ExerciseControllerTest {
 		restTemplate.delete(getRootUrl() + "healthify/exercise/CARDIO1");
 		Exercise exercise2 = restTemplate.getForObject(getRootUrl() + "healthify/exercise/CARDIO1", Exercise.class);
 		String expected = "CARDIO1 does not exist";
-		assertNotEquals(exercise2, expected);
+		assertNotEquals(exercise2, expected); //
 	}
 	
 	
