@@ -1,4 +1,5 @@
 package com.cg.healthify.test;
+import org.h2.api.CustomDataTypesHandler;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,8 +10,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.RestTemplate;
 
 import com.cg.healthify.beans.Payment;
 import com.cg.healthify.beans.WeightLog;
@@ -23,7 +26,9 @@ import com.cg.healthify.beans.NutritionPlan;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -49,15 +54,17 @@ public class CustomerModuleTests {
 	}
 	@Autowired
 	private TestRestTemplate restTemplate;
+	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void addCustomer() throws Exception {
 		LocalDate date = LocalDate.of(2020, 02, 1);
 		LocalDate date1 = LocalDate.of(2020, 02, 2);	
-	Customer cust=new Customer(1L,"1234567890",null,null,null,null,null,null,0,dietPlan,nutritionPlan,payment,date,date1);
-	cust.setContact("123");
+		Customer cust=new Customer(17L,"1111122333","Asmita Singh","Female","C013","P013","GOLD","VEG",0,dietPlan,nutritionPlan,payment,exercise,weightLog,calories,date,date1);
 	ResponseEntity<Customer> postResponse = restTemplate.postForEntity(getRootUrl() + "/api/customer", cust,
 			Customer.class);
 	assertNotNull(postResponse);
+	assertThat(postResponse.getStatusCode(), is(HttpStatus.OK));
 	}
 	
 	@Test
@@ -74,27 +81,31 @@ public class CustomerModuleTests {
 	
 	}
 	
+	
 @Test
 public void findCustomerById() {
 	LocalDate date = LocalDate.of(2020, 02, 1);
 	LocalDate date1 = LocalDate.of(2020, 02, 2);	
-Customer cust=new Customer(15L,"1234563390","Asmita Singh","Female","C011","P011","GOLD","VEG",0,dietPlan,nutritionPlan,payment,exercise,weightLog,calories,date,date1);
+Customer cust=new Customer(2L,"1234563391","Asmita Singh","Female","C03","P03","GOLD","VEG",0,dietPlan,nutritionPlan,payment,exercise,weightLog,calories,date,date1);
 ResponseEntity<Customer> postResponse = restTemplate.postForEntity(getRootUrl() + "/api/customer", cust,
 		Customer.class);
-ResponseEntity<Customer> postResponse1 = restTemplate.getForEntity(getRootUrl() + "/api/customer/C011",Customer.class);
+ResponseEntity<Customer> postResponse1 = restTemplate.getForEntity(getRootUrl() + "/api/customer/C03",Customer.class);
 assertEquals(postResponse,postResponse1);
 
 }
 	
 	@Test
-	public void deleteCsutomer() {
-		LocalDate date = LocalDate.of(2020, 02, 1);
-		LocalDate date1 = LocalDate.of(2020, 02, 2);	
-		Customer cust=new Customer(1L,"9454112394","Raghav Singh",null,null,null,null,null,0,dietPlan,nutritionPlan,payment,date,date1);
-		ResponseEntity<Customer> postResponse = restTemplate.postForEntity(getRootUrl() + "/api/customer", cust,
-				Customer.class);
-	    Customer cust1 = restTemplate.getForObject(getRootUrl() + "/api/customer/C01", Customer.class);
-	    restTemplate.delete(getRootUrl() + "/api/customer/C01");
-	    assertNotEquals(cust,cust1);
+	public void deleteCustomerPositive() {
+		   ResponseEntity<Customer> postResponse1 = restTemplate.getForEntity(getRootUrl() + "/api/customer/C09",Customer.class);
+	       int n=postResponse1.getStatusCodeValue();
+	     assertEquals(200,n);
+	     restTemplate.delete(getRootUrl() + "/api/customer/C09");
+	}
+	@Test
+	public void deleteCustomerNegative() {
+		   ResponseEntity<Customer> postResponse1 = restTemplate.getForEntity(getRootUrl() + "/api/customer/C08",Customer.class);
+	       int n=postResponse1.getStatusCodeValue();
+	     assertEquals(400,n);
+	     restTemplate.delete(getRootUrl() + "/api/customer/C08");
 	}
 }
