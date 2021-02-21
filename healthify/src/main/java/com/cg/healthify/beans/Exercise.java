@@ -23,7 +23,7 @@ import org.hibernate.validator.constraints.Range;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Entity  //exercise
+@Entity  
 public class Exercise {
 	
 	@Id
