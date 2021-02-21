@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class HealthifyApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HealthifyApplication.class, args);
+	 SpringApplication.run(HealthifyApplication.class, args);
 	}
 
 }

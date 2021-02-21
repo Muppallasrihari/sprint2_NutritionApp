@@ -52,7 +52,7 @@ public Customer save(Customer customer) {
 	}
 /**-----------------------------------------------------------------------------------------------------------------------**/	
 	catch(Exception e) {
-		throw new CustomerException("Contact: "+customer.getContact()+" already exists");
+		throw new CustomerException("Error Occured in this ID:"+customer.getCustomerIdentifier());
 	}
 	return customerRepository.save(customer);
 	}
