@@ -19,6 +19,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.cg.healthify.beans.Exercise;
+import com.cg.healthify.exceptions.ExerciseIdException;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -60,13 +62,14 @@ public class ExerciseControllerTest {
 		assertNotNull(exercise2);
 	}
 	
-	@Test 
+	@Test
 	public void deleteExerciseByExIdentifier() {
 		Exercise exercise1 = new Exercise(1, "CARDIO1", "Cardio", 3, 12, exPlans, date, date1);
 		exercise1 = restTemplate.getForObject(getRootUrl() + "healthify/exercise/CARDIO1", Exercise.class);
 		restTemplate.delete(getRootUrl() + "healthify/exercise/CARDIO1");
-		Exercise exercise2 = restTemplate.getForObject(getRootUrl() + "/exercise/CARDIO1", Exercise.class);
-		assertNotEquals(exercise2,exercise1);
+		Exercise exercise2 = restTemplate.getForObject(getRootUrl() + "healthify/exercise/CARDIO1", Exercise.class);
+		String expected = "CARDIO1 does not exist";
+		assertNotEquals(exercise2, expected);
 	}
 	
 	
