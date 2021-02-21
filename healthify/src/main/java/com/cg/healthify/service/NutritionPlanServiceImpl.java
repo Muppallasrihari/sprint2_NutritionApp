@@ -2,7 +2,6 @@ package com.cg.healthify.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.cg.healthify.beans.NutritionPlan;
 import com.cg.healthify.exceptions.NutritionIdException;
 import com.cg.healthify.repository.NutritionPlanRepository;
