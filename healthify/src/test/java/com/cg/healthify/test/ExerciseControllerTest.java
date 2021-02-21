@@ -52,7 +52,7 @@ public class ExerciseControllerTest {
 		assertNotNull(postResponse.getBody());
 	}
 	
-	@Test //test
+	@Test 
 	public void updateExerciseTest() {
 		Exercise exercise = new Exercise(1, "CARDIO1", "Cardio", 3, 12, exPlans, date, date1);
 		restTemplate.put(getRootUrl() + "/healthify/exercise/1", exercise);

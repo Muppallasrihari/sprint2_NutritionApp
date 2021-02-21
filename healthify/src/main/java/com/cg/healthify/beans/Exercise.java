@@ -58,7 +58,7 @@ public class Exercise {
 		this.exPlans = exPlans;
 	}
 	
-	//Localdate
+	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate createdAt;
 	
