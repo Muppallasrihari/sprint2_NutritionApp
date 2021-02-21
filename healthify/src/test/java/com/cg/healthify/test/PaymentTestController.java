@@ -70,64 +70,56 @@ class PaymentTestController {
 	@LocalServerPort
 	private int port;
 
-	private Customer customer = null;
-
-	private Payment payment1;
-	private Payment payment2;
-	@BeforeEach
-	public void setUpMockData() {
-		payment1 = new Payment(1L, "1-PAY", 1000.0, "P01", "UPI", 10.0, customer);
-		payment2 = new Payment(2L, "2-PAY", 3000.0, "P02", "PAYTM", 15.0, customer);
-	}
-
 	@SuppressWarnings("deprecation")
 	@Test
-	public void testForAddingPayment()throws Exception {
-		Payment payment11 = new Payment(18L, "9-PAY", 25000.0,23000.0, "P09", "PAYTM", 8.0);
+	public void testForAddingPayment() throws Exception {
+		Payment payment11 = new Payment(18L, "9-PAY", 25000.0, 23000.0, "P09", "PAYTM", 8.0);
 
 		// when(service.addPayment(null,payment1)).thenReturn(payment1);
-	 ResponseEntity<Payment> postResponse = restTemplate.postForEntity("http://localhost:" + port + "/payment/P09",
+		ResponseEntity<Payment> postResponse = restTemplate.postForEntity("http://localhost:" + port + "/payment/P09",
 				payment11, Payment.class);
-	           // assertNotNull(postResponse);
-		   //assertEquals(postResponse,postResponse1);
-		//assertNotNull(postResponse.getBody());
-		 assertThat(postResponse.getStatusCode(), is(HttpStatus.OK));
+		// assertNotNull(postResponse);
+		// assertEquals(postResponse,postResponse1);
+		// assertNotNull(postResponse.getBody());
+		assertThat(postResponse.getStatusCode(), is(HttpStatus.OK));
 	}
 
-	
+	@Test
+	public void findPaymentById() {
 
+		Payment payment2 = new Payment(1L, "9-PAY", 25000.0, 23000.0, "P09", "PAYTM", 8.0);
+		ResponseEntity<Payment> postResponse = restTemplate.postForEntity("http://localhost:" + port + "/payment",
+				payment2, Payment.class);
+		ResponseEntity<Payment> postResponse1 = restTemplate.getForEntity("http://localhost:" + port + "/payment/9-PAY",
+				Payment.class);
+		// assertEquals(postResponse,postResponse1);
+		assertThat(postResponse1.getStatusCode(), is(HttpStatus.OK));
+
+	}
+	
 	@Test
 	public void testfindAllPayments() {
-		List<Payment> payment = new ArrayList<>();
-		payment.add(payment1);
-		payment.add(payment2);
-		when(service.getAllPayments()).thenReturn(payment);
-		ResponseEntity<Payment> getResponse = restTemplate.postForEntity("http://localhost:" + port + "/allpayments",
-				payment, Payment.class);
+		Payment payment3 = new Payment(2L, "2-PAY", 25000.0, 23000.0, "P02", "PAYTM", 8.0);
+		Payment payment4 = new Payment(3L, "3-PAY", 25000.0, 23000.0, "P03", "PAYTM", 8.0);
+
+		List<Payment> pay = new ArrayList<>();
+		pay.add(payment3);
+		pay.add(payment4);
+		when(service.getAllPayments()).thenReturn(pay);
+		ResponseEntity<Payment> getResponse = restTemplate.postForEntity("http://localhost:" + port + "/payment/allpayments",
+				pay, Payment.class);
 		assertNotNull(getResponse);
+		//assertThat(getResponse.getStatusCode(), is(HttpStatus.OK));
+
 
 	}
-
+	
 	@Test
-	public void testFindPaymentId() {
-
-		when(service.findPaymentByTransactionId("1-PAY")).thenReturn(payment1);
-		ResponseEntity<Payment> getResponse = restTemplate.getForEntity("http://localhost:" + port + "/{transactionId}",
-				Payment.class, "1-PAY");
-		assertNotNull(getResponse.getBody());
-		assertNotEquals(payment1, getResponse.getBody());
-		assertThat(getResponse.getStatusCode());
-
+	public void deletePaymentPositive() {
+		   ResponseEntity<Payment> postResponse1 = restTemplate.getForEntity("http://localhost:"+port + "/payment/1-PAY",Payment.class);
+	       int n=postResponse1.getStatusCodeValue();
+	     assertEquals(200,n);
+	     restTemplate.delete("http://localhost:"+port + "/payment/1-PAY");
 	}
 
-/*	
-	@Test
-	public void deletePaymentForValidId() {
-
-		restTemplate.delete("http://localhost:" + port + "/nutritionplan/SILVER");
-		Payment payment = restTemplate.getForObject("http://localhost:" + port + "/payment/1-PAY", Payment.class);
-	//	assertEquals(payment1, payment);
-
-	}
-*/
 }
