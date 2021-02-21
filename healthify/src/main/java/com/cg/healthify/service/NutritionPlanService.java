@@ -13,5 +13,5 @@ public interface NutritionPlanService {
 	public NutritionPlan addOrUpdate(NutritionPlan nutritionPlan);
 	public Iterable<NutritionPlan> getAllNutritionPlans();
 	public NutritionPlan getNutritionPlanById(String planId);
-	public void deleteNutritionPlanById(String planId);
+	public int deleteNutritionPlanById(String planId);
 }
