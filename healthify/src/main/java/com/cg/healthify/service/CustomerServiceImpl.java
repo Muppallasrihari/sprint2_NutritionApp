@@ -45,7 +45,7 @@ public Customer save(Customer customer) {
 /**-----------------------------------------------------------------------------------------------------------------------**/	 
 		
 /**-------------------------------------EXERCISE PART---------------------------------------------------------------------**/	 
-	 Exercise exercise = exerciseRepository.findByExIdentifier(customer.getPlanId().toUpperCase());
+	 Exercise exercise = exerciseRepository.findByExIdentifier(customer.getExIdentifier().toUpperCase());
 		if(exercise!=null) {
 			 customer.setExercise(exercise); 
 		 }	 

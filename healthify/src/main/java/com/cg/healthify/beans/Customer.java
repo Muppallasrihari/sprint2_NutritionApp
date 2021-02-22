@@ -46,7 +46,8 @@ public class Customer {
 	private String planId;
 	@NotBlank(message = "Food Type Required")
 	private String foodType;
-
+	@NotBlank(message = "Exercise Identifier Required")
+	private String exIdentifier;
 
 	public String getFoodType() {
 		return foodType;
@@ -83,7 +84,7 @@ public class Customer {
 	 *  ----------------------------------OneTOne mapping with Exercise
 	 *-----------------------
 	 **/
-	@OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL,targetEntity = Exercise.class)
+	@OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.DETACH,targetEntity = Exercise.class)
 	private Exercise exercise;
 
 /**
@@ -244,15 +245,25 @@ public void setWeightLog(List<WeightLog> weightLog) {
 		this.calorieslog = calorieslog;
 	}
 
+	
+	public String getExIdentifier() {
+		return exIdentifier;
+	}
+
+	public void setExIdentifier(String exIdentifier) {
+		this.exIdentifier = exIdentifier;
+	}
+
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", contact=" + contact + ", name=" + name + ", gender=" + gender
 				+ ", customerIdentifier=" + customerIdentifier + ", paymentIdentifier=" + paymentIdentifier
-				+ ", planId=" + planId + ", foodType=" + foodType + ", PTSequence=" + PTSequence + ", dietPlan="
-				+ dietPlan + ", nutritionPlan=" + nutritionPlan + ", payment=" + payment + ", exercise=" + exercise
-				+ ", weightLog=" + weightLog + ", calorieslog=" + calorieslog + ", createdDate=" + createdDate
-				+ ", updatedDate=" + updatedDate + "]";
+				+ ", planId=" + planId + ", foodType=" + foodType + ", exIdentifier=" + exIdentifier + ", PTSequence="
+				+ PTSequence + ", dietPlan=" + dietPlan + ", nutritionPlan=" + nutritionPlan + ", payment=" + payment
+				+ ", exercise=" + exercise + ", weightLog=" + weightLog + ", calorieslog=" + calorieslog
+				+ ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + "]";
 	}
+
 	public Customer() {
 		super();
 		
@@ -322,6 +333,7 @@ public void setWeightLog(List<WeightLog> weightLog) {
 		result = prime * result + ((createdDate == null) ? 0 : createdDate.hashCode());
 		result = prime * result + ((customerIdentifier == null) ? 0 : customerIdentifier.hashCode());
 		result = prime * result + ((dietPlan == null) ? 0 : dietPlan.hashCode());
+		result = prime * result + ((exIdentifier == null) ? 0 : exIdentifier.hashCode());
 		result = prime * result + ((exercise == null) ? 0 : exercise.hashCode());
 		result = prime * result + ((foodType == null) ? 0 : foodType.hashCode());
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
@@ -374,6 +386,11 @@ public void setWeightLog(List<WeightLog> weightLog) {
 			if (other.dietPlan != null)
 				return false;
 		} else if (!dietPlan.equals(other.dietPlan))
+			return false;
+		if (exIdentifier == null) {
+			if (other.exIdentifier != null)
+				return false;
+		} else if (!exIdentifier.equals(other.exIdentifier))
 			return false;
 		if (exercise == null) {
 			if (other.exercise != null)
@@ -432,6 +449,8 @@ public void setWeightLog(List<WeightLog> weightLog) {
 			return false;
 		return true;
 	}
+
+	
 
 	
 }
