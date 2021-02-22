@@ -5,56 +5,29 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import org.junit.runner.RunWith;
+ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import com.cg.healthify.beans.Payment;
-import com.cg.healthify.beans.WeightLog;
-import com.cg.healthify.beans.CaloriesLog;
-import com.cg.healthify.beans.Customer;
-import com.cg.healthify.beans.DietPlan;
-import com.cg.healthify.beans.Exercise;
-import com.cg.healthify.beans.NutritionPlan;
-
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-
-import static org.junit.Assert.assertNull;
-import java.util.ArrayList;
-import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.cg.healthify.beans.Customer;
-import com.cg.healthify.beans.NutritionPlan;
 import com.cg.healthify.beans.Payment;
-import com.cg.healthify.beans.WeightLog;
+
+import org.springframework.boot.test.web.client.TestRestTemplate;
+
+
 import com.cg.healthify.exceptions.PaymentIdNotFoundException;
-import com.cg.healthify.exceptions.WeightLogIdException;
 import com.cg.healthify.service.PaymentServiceImpl;
 
 @RunWith(SpringRunner.class)
@@ -70,7 +43,6 @@ class PaymentTestController {
 	@LocalServerPort
 	private int port;
 
-	@SuppressWarnings("deprecation")
 	@Test
 	public void testForAddingPayment() throws Exception {
 		Payment payment11 = new Payment(18L, "9-PAY", 25000.0, 23000.0, "P09", "PAYTM", 8.0);
@@ -115,11 +87,19 @@ class PaymentTestController {
 	}
 	
 	@Test
-	public void deletePaymentPositive() {
+	public void deletePayment() {
 		   ResponseEntity<Payment> postResponse1 = restTemplate.getForEntity("http://localhost:"+port + "/payment/1-PAY",Payment.class);
 	       int n=postResponse1.getStatusCodeValue();
 	     assertEquals(200,n);
 	     restTemplate.delete("http://localhost:"+port + "/payment/1-PAY");
+	}
+	
+	
+	@Test
+	public void DeletePaymentByIdException() throws PaymentIdNotFoundException {	
+		ResponseEntity<Payment> postResponse = restTemplate.getForEntity("http://localhost:"+port  + "/payment/100-PAY",Payment.class);
+		int actual=postResponse.getStatusCodeValue();
+		assertEquals(400,actual);
 	}
 
 }
