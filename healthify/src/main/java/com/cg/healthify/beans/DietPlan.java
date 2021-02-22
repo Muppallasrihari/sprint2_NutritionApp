@@ -117,5 +117,9 @@ public boolean equals(Object obj) {
 		return false;
 	return true;
 }
+public DietPlan() {
+	super();
+	// TODO Auto-generated constructor stub
+}
 
 }

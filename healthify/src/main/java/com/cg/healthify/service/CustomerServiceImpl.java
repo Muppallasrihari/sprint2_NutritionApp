@@ -29,7 +29,7 @@ private ExerciseRepository exerciseRepository;
 @Override
 public Customer save(Customer customer) {
 	try {
-		customer.setCustomerIdentifier(customer.getCustomerIdentifier().toUpperCase());		  
+		customer.setCustomerIdentifier(customer.getCustomerIdentifier().toUpperCase());		
 /**------------------------------------------DIET PLAN PART---------------------------------------------------------------**/			
 	 DietPlan dietplan=dietPlanRepository.findByFoodType(customer.getFoodType().toUpperCase());
 	 if(dietplan!=null) {
@@ -49,12 +49,13 @@ public Customer save(Customer customer) {
 		if(exercise!=null) {
 			 customer.setExercise(exercise); 
 		 }	 
+		return customerRepository.save(customer);
 	}
 /**-----------------------------------------------------------------------------------------------------------------------**/	
 	catch(Exception e) {
 		throw new CustomerException("Error Occured in this ID:"+customer.getCustomerIdentifier());
 	}
-	return customerRepository.save(customer);
+	
 	}
 /**----------------------------------------------------------------------------------------**/
 
