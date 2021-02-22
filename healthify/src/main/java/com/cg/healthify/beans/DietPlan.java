@@ -61,6 +61,11 @@ public Double getProteinRatio() {
 public void setProteinRatio(Double proteinRatio) {
 	this.proteinRatio = proteinRatio;
 }
+
+public DietPlan() {
+	super();
+	// TODO Auto-generated constructor stub
+}
 public DietPlan(Long id, @NotBlank(message = "Food Type Reqiured") String foodType, Double fatRatio, Double carbsRatio,
 		Double proteinRatio) {
 	super();
