@@ -3,7 +3,7 @@ package com.cg.healthify.test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
-
+import java.util.Arrays;
 import java.util.Collection;
 
 
@@ -40,7 +40,7 @@ public class ExerciseControllerTest {
 	private LocalDate date;
 	 
 	
-	private Collection<String> exPlans = null;
+	private Collection<String> exPlans = Arrays.asList("Skipping","JumpingJacks");
 	
 	@Test
 	public void addExerciseTest() {
@@ -55,7 +55,7 @@ public class ExerciseControllerTest {
 	public void updateExerciseTest() {
 		Exercise exercise = new Exercise(1, "CARDIO1", "Cardio", 3, 12, exPlans, date, date);
 		restTemplate.put(getRootUrl() + "/healthify/exercise/1", exercise);
-		Exercise exercise2 = restTemplate.getForObject(getRootUrl() + "/exercise/1", Exercise.class);
+		Exercise exercise2 = restTemplate.getForObject(getRootUrl() + "/healthify/exercise/1", Exercise.class);
 		assertNotNull(exercise2);
 	}
 	
