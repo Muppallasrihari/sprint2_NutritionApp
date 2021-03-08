@@ -144,7 +144,7 @@ public class WeightLog {
 
 
 
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

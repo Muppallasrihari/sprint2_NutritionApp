@@ -102,7 +102,6 @@ public class Exercise {
 	public void onUpdate() {
 		this.updatedAt = LocalDate.now();
 	}
-
 	
 	public LocalDate getCreatedAt() {
 		return createdAt;
@@ -199,4 +198,10 @@ public class Exercise {
 	}
 	
 	
+	
+	
+	
+	
+	
+
 }

@@ -1,4 +1,4 @@
-package com.cg.healthify.test;
+/*package com.cg.healthify.test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
@@ -56,22 +56,6 @@ public class PaymentTest {
 		payment2 = new Payment(2L, "2-PAY", 3000.0, "P02", "PAYTM", 15.0, customer);
 	}
 
-	@Test
-	public void testForAddingPayment()throws Exception {
-		//Payment payment11 = new Payment(1L, "1-PAY", 1000.0, "P08", "UPI", 10.0, customer);
-
-		// when(service.addPayment(null,payment1)).thenReturn(payment1);
-	ResponseEntity<Payment> postResponse = restTemplate.postForEntity("http://localhost:" + port + "/payment/",
-				payment1, Payment.class);
-	ResponseEntity<Payment> postResponse1 = restTemplate.postForEntity("http://localhost:" + port + "/payment/",
-				payment1, Payment.class);
-	           // assertNotNull(postResponse);
-		 assertEquals(postResponse,postResponse1);
-		//assertNotNull(postResponse.getBody());
-		// assertThat(postResponse.getStatusCode(), is(HttpStatus.CREATED));
-	}
-
-	
 
 	@Test
 	public void testfindAllPayments() {
@@ -89,28 +73,22 @@ public class PaymentTest {
 	public void testFindPaymentId() {
 
 		when(service.findPaymentByTransactionId("1-PAY")).thenReturn(payment1);
-		ResponseEntity<Payment> getResponse = restTemplate.getForEntity("http://localhost:" + port + "/{transactionId}",
+		ResponseEntity<Payment> getResponse = restTemplate.getForEntity("http://localhost:" + port + "/payment/1-PAY",
 				Payment.class, "1-PAY");
 		assertNotNull(getResponse.getBody());
 		assertNotEquals(payment1, getResponse.getBody());
-		assertThat(getResponse.getStatusCode());
+		assertThat(getResponse.getStatusCode(), is(HttpStatus.OK));
 
 	}
 
-	/*
-	 * @Test public void deletePaymentById() { Payment payment1=
-	 * restTemplate.getForObject("http://localhost:"+port+ "/1-PAY", Payment.class);
-	 * restTemplate.delete("http://localhost:"+port+"/1-PAY"); Payment payment2 =
-	 * restTemplate.getForObject("http://localhost:"+port + "/1-PAY",
-	 * Payment.class); assertNotEquals(payment1,payment2); }
-	 */
+	
 	@Test
-	public void deletePaymentForValidId() {
-
-		restTemplate.delete("http://localhost:" + port + "/nutritionplan/SILVER");
-		Payment payment = restTemplate.getForObject("http://localhost:" + port + "/payment/1-PAY", Payment.class);
-	//	assertEquals(payment1, payment);
-
+	public void deletePaymentPositive() {
+		   ResponseEntity<Payment> postResponse1 = restTemplate.getForEntity("http://localhost:"+port + "/payment/1-PAY",Payment.class);
+	       int n=postResponse1.getStatusCodeValue();
+	     assertEquals(200,n);
+	     restTemplate.delete("http://localhost:"+port + "/payment/1-PAY");
 	}
 
 }
+*/

@@ -146,6 +146,7 @@ public class NutritionPlan {
 		return "NutritionPlan [id=" + id + ", planId=" + planId + ", name=" + name + ", description=" + description
 				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", price=" + price + "]";
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -191,5 +192,6 @@ public class NutritionPlan {
 	}
 	
 	
+
 
 }

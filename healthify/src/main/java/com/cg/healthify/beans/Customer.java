@@ -36,17 +36,22 @@ public class Customer {
 	private String name;
 	@NotBlank(message = "Gender Required")
 	private String gender;
-	@NotBlank(message = "Customer Identifier Reqiured")
-	@Column(unique = true, updatable = false)
 	private String customerIdentifier;
-	@NotBlank(message = "Payment Identifier Required")
-	@Column(unique = true, updatable = false)
 	private String paymentIdentifier;
 	@NotBlank(message = "Plan Id is Required")
 	private String planId;
 	@NotBlank(message = "Food Type Required")
 	private String foodType;
+	private String exIdentifier;
+	private String password;
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public String getFoodType() {
 		return foodType;
@@ -83,7 +88,7 @@ public class Customer {
 	 *  ----------------------------------OneTOne mapping with Exercise
 	 *-----------------------
 	 **/
-	@OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL,targetEntity = Exercise.class)
+	@OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.DETACH,targetEntity = Exercise.class)
 	private Exercise exercise;
 
 /**
@@ -244,72 +249,13 @@ public void setWeightLog(List<WeightLog> weightLog) {
 		this.calorieslog = calorieslog;
 	}
 
-	@Override
-	public String toString() {
-		return "Customer [id=" + id + ", contact=" + contact + ", name=" + name + ", gender=" + gender
-				+ ", customerIdentifier=" + customerIdentifier + ", paymentIdentifier=" + paymentIdentifier
-				+ ", planId=" + planId + ", foodType=" + foodType + ", PTSequence=" + PTSequence + ", dietPlan="
-				+ dietPlan + ", nutritionPlan=" + nutritionPlan + ", payment=" + payment + ", exercise=" + exercise
-				+ ", weightLog=" + weightLog + ", calorieslog=" + calorieslog + ", createdDate=" + createdDate
-				+ ", updatedDate=" + updatedDate + "]";
-	}
-	public Customer() {
-		super();
-		
-	}
-
-	public Customer(Long id, @NotBlank(message = "Contact Required") String contact,
-			@NotBlank(message = "Name Required") String name, @NotBlank(message = "Gender Required") String gender,
-			@NotBlank(message = "Customer Identifier Reqiured") String customerIdentifier,
-			@NotBlank(message = "Payment Identifier Required") String paymentIdentifier,
-			@NotBlank(message = "Plan Id is Required") String planId,
-			@NotBlank(message = "Food Type Required") String foodType, Integer pTSequence, DietPlan dietPlan,
-			NutritionPlan nutritionPlan, List<Payment> payment, LocalDate createdDate, LocalDate updatedDate) {
-		super();
-		this.id = id;
-		this.contact = contact;
-		this.name = name;
-		this.gender = gender;
-		this.customerIdentifier = customerIdentifier;
-		this.paymentIdentifier = paymentIdentifier;
-		this.planId = planId;
-		this.foodType = foodType;
-		this.PTSequence = pTSequence;
-		this.dietPlan = dietPlan;
-		this.nutritionPlan = nutritionPlan;
-		this.payment = payment;
-		this.createdDate = createdDate;
-		this.updatedDate = updatedDate;
-	}
-
 	
-	public Customer(Long id,
-			@NotBlank(message = "Contact Required") @Size(max = 10, min = 10, message = "Phone number must be 10 digits") String contact,
-			@NotBlank(message = "Name Required") String name, @NotBlank(message = "Gender Required") String gender,
-			@NotBlank(message = "Customer Identifier Reqiured") String customerIdentifier,
-			@NotBlank(message = "Payment Identifier Required") String paymentIdentifier,
-			@NotBlank(message = "Plan Id is Required") String planId,
-			@NotBlank(message = "Food Type Required") String foodType, Integer pTSequence, DietPlan dietPlan,
-			NutritionPlan nutritionPlan, List<Payment> payment, Exercise exercise, List<WeightLog> weightLog,
-			CaloriesLog calorieslog, LocalDate createdDate, LocalDate updatedDate) {
-		super();
-		this.id = id;
-		this.contact = contact;
-		this.name = name;
-		this.gender = gender;
-		this.customerIdentifier = customerIdentifier;
-		this.paymentIdentifier = paymentIdentifier;
-		this.planId = planId;
-		this.foodType = foodType;
-		this.PTSequence = pTSequence;
-		this.dietPlan = dietPlan;
-		this.nutritionPlan = nutritionPlan;
-		this.payment = payment;
-		this.exercise = exercise;
-		this.weightLog = weightLog;
-		this.calorieslog = calorieslog;
-		this.createdDate = createdDate;
-		this.updatedDate = updatedDate;
+	public String getExIdentifier() {
+		return exIdentifier;
+	}
+
+	public void setExIdentifier(String exIdentifier) {
+		this.exIdentifier = exIdentifier;
 	}
 
 	@Override
@@ -322,12 +268,14 @@ public void setWeightLog(List<WeightLog> weightLog) {
 		result = prime * result + ((createdDate == null) ? 0 : createdDate.hashCode());
 		result = prime * result + ((customerIdentifier == null) ? 0 : customerIdentifier.hashCode());
 		result = prime * result + ((dietPlan == null) ? 0 : dietPlan.hashCode());
+		result = prime * result + ((exIdentifier == null) ? 0 : exIdentifier.hashCode());
 		result = prime * result + ((exercise == null) ? 0 : exercise.hashCode());
 		result = prime * result + ((foodType == null) ? 0 : foodType.hashCode());
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((nutritionPlan == null) ? 0 : nutritionPlan.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((payment == null) ? 0 : payment.hashCode());
 		result = prime * result + ((paymentIdentifier == null) ? 0 : paymentIdentifier.hashCode());
 		result = prime * result + ((planId == null) ? 0 : planId.hashCode());
@@ -375,6 +323,11 @@ public void setWeightLog(List<WeightLog> weightLog) {
 				return false;
 		} else if (!dietPlan.equals(other.dietPlan))
 			return false;
+		if (exIdentifier == null) {
+			if (other.exIdentifier != null)
+				return false;
+		} else if (!exIdentifier.equals(other.exIdentifier))
+			return false;
 		if (exercise == null) {
 			if (other.exercise != null)
 				return false;
@@ -405,6 +358,11 @@ public void setWeightLog(List<WeightLog> weightLog) {
 				return false;
 		} else if (!nutritionPlan.equals(other.nutritionPlan))
 			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
 		if (payment == null) {
 			if (other.payment != null)
 				return false;
@@ -431,6 +389,44 @@ public void setWeightLog(List<WeightLog> weightLog) {
 		} else if (!weightLog.equals(other.weightLog))
 			return false;
 		return true;
+	}
+
+	public Customer(Long id,
+			@NotBlank(message = "Contact Required") @Size(max = 10, min = 10, message = "Phone number must be 10 digits") String contact,
+			@NotBlank(message = "Name Required") String name, @NotBlank(message = "Gender Required") String gender,
+		      String customerIdentifier,
+			 String paymentIdentifier,
+			@NotBlank(message = "Plan Id is Required") String planId,
+			@NotBlank(message = "Food Type Required") String foodType,
+		    String exIdentifier, String password,
+			Integer pTSequence, DietPlan dietPlan, NutritionPlan nutritionPlan, List<Payment> payment,
+			Exercise exercise, List<WeightLog> weightLog, CaloriesLog calorieslog, LocalDate createdDate,
+			LocalDate updatedDate) {
+		super();
+		this.id = id;
+		this.contact = contact;
+		this.name = name;
+		this.gender = gender;
+		this.customerIdentifier = customerIdentifier;
+		this.paymentIdentifier = paymentIdentifier;
+		this.planId = planId;
+		this.foodType = foodType;
+		this.exIdentifier = exIdentifier;
+		this.password = password;
+		PTSequence = pTSequence;
+		this.dietPlan = dietPlan;
+		this.nutritionPlan = nutritionPlan;
+		this.payment = payment;
+		this.exercise = exercise;
+		this.weightLog = weightLog;
+		this.calorieslog = calorieslog;
+		this.createdDate = createdDate;
+		this.updatedDate = updatedDate;
+	}
+
+	public Customer() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	
