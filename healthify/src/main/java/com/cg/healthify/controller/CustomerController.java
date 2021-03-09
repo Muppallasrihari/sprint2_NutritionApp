@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,11 +16,13 @@ import com.cg.healthify.beans.Customer;
 import com.cg.healthify.service.CustomerService;
 import com.cg.healthify.service.MapValidationErrorService;
 
+import java.util.Optional;
 
 import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/customer")
+@CrossOrigin
 public class CustomerController {
 
 @Autowired	
@@ -42,10 +45,11 @@ private MapValidationErrorService mapValidationErrorService;
 	
 /**------------------------------FIND CUSTOMER BY CUSTOEMR-ID-----------------------------------------**/	
 	
-	@GetMapping("/{customerIdentifier}")
-	public ResponseEntity<Customer> getCustomerById(@PathVariable String customerIdentifier){
-		Customer cust=customerService.findCustomerById(customerIdentifier);
-		return new ResponseEntity<Customer>(cust,HttpStatus.OK);
+	@GetMapping("/{id}")
+	public ResponseEntity<Customer> getCustomerById(@PathVariable Long id){
+		Optional<Customer> cust=customerService.findCustomerById(id);
+		Customer cus=cust.get();
+		return new ResponseEntity<Customer>(cus,HttpStatus.OK);
 	}
 /**---------------------------------------------------------------------------------------------------**/	
 	
@@ -59,10 +63,10 @@ private MapValidationErrorService mapValidationErrorService;
 	
 	
 /**-------------------------------DELETE CUSTOMER BY CUSTOMER ID---------------------------------------**/	
-	@DeleteMapping("/{customerIdentifier}")
-	public ResponseEntity<?> DeleteCustomerById(@PathVariable String customerIdentifier){
-		customerService.deleteCustomerById(customerIdentifier);
-		return new ResponseEntity<String>("Customer with ID "+customerIdentifier+" was deleted",HttpStatus.OK);
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> DeleteCustomerById(@PathVariable Long id){
+		int cust=customerService.deleteCustomerById(id);
+		return new ResponseEntity<String>("Customer with ID "+id+" was deleted",HttpStatus.OK);
 	}
 }
 /**--------------------------**************************************-------------------------------------**/
