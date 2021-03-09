@@ -40,7 +40,7 @@ public class WeightLogController {
 	 * @return
 	 */
 	@ApiOperation(value="Add WeightLog details")
-	@PostMapping("/addOrUpdateWeightLog")
+	@PostMapping("")
 	public ResponseEntity<?> addOrUpdateWeightLog(@Valid @RequestBody WeightLog weightLog,BindingResult result)
 	{
 		ResponseEntity<?> errorMap= mapValidationErrorService.mapValidationError(result);
