@@ -32,10 +32,10 @@ public class CaloriesLog {
 	@Column(unique=true,updatable=false)
 	private String caloriesLogIdentifier;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
+	//@JsonFormat(pattern="yyyy-MM-dd")
 	private LocalDateTime createdAt;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
+	//@JsonFormat(pattern="yyyy-MM-dd")
 	private LocalDateTime updatedAt;
 	
 	
