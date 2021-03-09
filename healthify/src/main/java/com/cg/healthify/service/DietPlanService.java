@@ -9,5 +9,6 @@ public interface DietPlanService {
 	public DietPlan saveDietPlan(DietPlan dietPlan);
 	public DietPlan getDietPlanByFoodType(String foodType);
 	public Iterable<DietPlan>getAllDietDetails();
+	public void deleteByFoodType(String foodType); 
 	
 }
