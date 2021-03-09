@@ -36,7 +36,7 @@ public class WeightLog {
 		this.weightId = weightId;
 		this.weight = weight;
 		this.created_At = created_At;
-		Updated_At = updated_At;
+		this.updated_At = updated_At;
 	}
 
 	@Id
@@ -71,14 +71,14 @@ public class WeightLog {
 	/**
 	 * @param created_At Date must be in json format
 	 */
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	//@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDateTime created_At;
 
 	/**
 	 * @param updated_At Date must be json format
 	 */
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	private LocalDateTime Updated_At;
+	//@JsonFormat(pattern = "yyyy-MM-dd")
+	private LocalDateTime updated_At;
 
 	public String getWeight() {
 		return weight;
@@ -105,28 +105,28 @@ public class WeightLog {
 	}
 
 	public LocalDateTime getUpdated_At() {
-		return Updated_At;
+		return updated_At;
 	}
 
 	public void setUpdated_At(LocalDateTime updated_At) {
-		Updated_At = updated_At;
+		this.updated_At = updated_At;
 	}
 
-	@PrePersist
-	public void onCreate() {
-		this.created_At = LocalDateTime.now();
-	}
+// 	@PrePersist
+// 	public void onCreate() {
+// 		this.created_At = LocalDateTime.now();
+// 	}
 
-	@PreUpdate
-	public void onUpdate() {
-		this.Updated_At = LocalDateTime.now();
-	}
+// 	@PreUpdate
+// 	public void onUpdate() {
+// 		this.Updated_At = LocalDateTime.now();
+// 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Updated_At == null) ? 0 : Updated_At.hashCode());
+		result = prime * result + ((updated_At == null) ? 0 : updated_At.hashCode());
 		result = prime * result + ((created_At == null) ? 0 : created_At.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((weight == null) ? 0 : weight.hashCode());
@@ -139,7 +139,7 @@ public class WeightLog {
 	@Override
 	public String toString() {
 		return "WeightLog [id=" + id + ", weightId=" + weightId + ", weight=" + weight + ", created_At=" + created_At
-				+ ", Updated_At=" + Updated_At + "]";
+				+ ", updated_At=" + updated_At + "]";
 	}
 
 
@@ -154,10 +154,10 @@ public class WeightLog {
 		if (getClass() != obj.getClass())
 			return false;
 		WeightLog other = (WeightLog) obj;
-		if (Updated_At == null) {
-			if (other.Updated_At != null)
+		if (updated_At == null) {
+			if (other.updated_At != null)
 				return false;
-		} else if (!Updated_At.equals(other.Updated_At))
+		} else if (!updated_At.equals(other.updated_At))
 			return false;
 		if (created_At == null) {
 			if (other.created_At != null)
