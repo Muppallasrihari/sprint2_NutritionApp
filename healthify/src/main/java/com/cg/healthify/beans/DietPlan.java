@@ -21,7 +21,7 @@ public class DietPlan {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	@NotBlank(message="Food Type Required")
-	
+	@Column(unique = true, updatable = false)
 	private String foodType;
 	@NotNull(message="Fat Ratio Required")
 	private Double fatRatio;
