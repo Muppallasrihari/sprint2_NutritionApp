@@ -1,5 +1,7 @@
 package com.cg.healthify.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +30,14 @@ private ExerciseRepository exerciseRepository;
 /**-----------------------------Create Customer Data Along with Connected Entities----------**/
 @Override
 public Customer save(Customer customer) {
-	try {
-		customer.setCustomerIdentifier(customer.getCustomerIdentifier().toUpperCase());		
+System.out.println(customer.getId());	
+int inc=customer.getContact().charAt(0)+customer.getContact().charAt(1)+customer.getContact().charAt(2);
+try {
+	customer.setCustomerIdentifier("C0"+inc);
+	customer.setPaymentIdentifier("P0"+inc);
+	customer.setExIdentifier("E0"+inc);
+	String dummyPassword=customer.getName().split(" ")[0]+customer.getCustomerIdentifier();
+		customer.setPassword(dummyPassword);
 /**------------------------------------------DIET PLAN PART---------------------------------------------------------------**/			
 	 DietPlan dietplan=dietPlanRepository.findByFoodType(customer.getFoodType().toUpperCase());
 	 if(dietplan!=null) {
@@ -45,7 +53,7 @@ public Customer save(Customer customer) {
 /**-----------------------------------------------------------------------------------------------------------------------**/	 
 		
 /**-------------------------------------EXERCISE PART---------------------------------------------------------------------**/	 
-	 Exercise exercise = exerciseRepository.findByExIdentifier(customer.getPlanId().toUpperCase());
+	 Exercise exercise = exerciseRepository.findByExIdentifier(customer.getExIdentifier().toUpperCase());
 		if(exercise!=null) {
 			 customer.setExercise(exercise); 
 		 }	 
@@ -61,10 +69,10 @@ public Customer save(Customer customer) {
 
 /**-------------------------------Find Customer By CustomerIdentifier---------------------------------------**/
 @Override
-public Customer findCustomerById(String customerIdentifier) {
-	Customer customer=customerRepository.findByCustomerIdentifier(customerIdentifier);
+public Optional<Customer> findCustomerById(Long id) {
+	Optional<Customer> customer=customerRepository.findById(id);
 	if(customer==null) {
-		throw new CustomerException("Id: "+customerIdentifier+" doesn't exists");
+		throw new CustomerException("Id: "+id+" doesn't exists");
 	}
 	return customer;
 }
@@ -83,13 +91,14 @@ public Iterable<Customer>getAllCustomerDetails(){
 
 /**------------------------------Delete Customer By CustomerIdentifier-------------------------------------**/
 @Override
-public int deleteCustomerById(String customerIdentifier) {
+public int deleteCustomerById(Long id) {
 	int res=0;
-	Customer customer=customerRepository.findByCustomerIdentifier(customerIdentifier);
-	if(customer==null) {
-		throw new CustomerException("Id: "+customerIdentifier+" doesn't exists");
+	Optional<Customer> customer=customerRepository.findById(id);
+	Customer cus=customer.get();
+	if(cus==null) {
+		throw new CustomerException("Id: "+id+" doesn't exists");
 	}else {
-		customerRepository.delete(customer);
+		customerRepository.delete(cus);
 		res=1;
 	}
 	return res;
