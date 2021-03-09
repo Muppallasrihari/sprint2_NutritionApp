@@ -15,22 +15,22 @@ public class DietPlanServiceImpl implements DietPlanService{
 	private DietPlanRepository dietPlanRepository;
 	@Autowired
 	private CustomerRepository customerRepository;
-
-/**-----------------------------------Update Existing Diet Plan-------------------------**/	
+	/**
+	 * This method saveDietPlan() is for saving DietPlan
+	 */
 	@Override
 	public DietPlan saveDietPlan(DietPlan dietPlan) {
 		try {
-		//nutritionPlan.setPlanId(nutritionPlan.getPlanId().toUpperCase());/
-		dietPlan.setFoodType(dietPlan.getFoodType().toUpperCase());
+			dietPlan.setFoodType(dietPlan.getFoodType().toUpperCase());
 			return dietPlanRepository.save(dietPlan);	
-		}
-		catch(Exception e) {
-			throw new DietPlanException("This Diet-Plan: "+dietPlan.getId()+" already exists");
+		}catch(Exception e) {
+			throw new DietPlanException("This Diet-Plan: "+dietPlan.getFoodType()+" already exists");
 		}
 	}
 /**--------------------------------------------------------------------------------------------**/
-
-/**---------------------------------Find Diet Plan By FoodType---------------------------------------**/
+	/**
+	 * This method getDietPlanByFoodType() is for getting a DietPlan by foodType
+	 */
 	@Override	
 	public DietPlan getDietPlanByFoodType(String foodType) {
 		DietPlan diet= dietPlanRepository.findByFoodType(foodType);
@@ -42,25 +42,24 @@ public class DietPlanServiceImpl implements DietPlanService{
 
 /**---------------------------------------------------------------------------------------**/
 
-/**------------------------------Get List of All Diet Plan--------------------------------**/
+	/**
+	 * This method getAllDietDetails() is for getting all the DietPlans
+	 */
 	@Override
 	public Iterable<DietPlan>getAllDietDetails(){
 		return dietPlanRepository.findAll();
 	}
-/**----------------------------------------------------------------------------------------**/
-	
-/**-----------------------Delete By FoodType------------------------------------------------**/
-	
-public int deleteByFoodType(String foodType) {
-	int res=0;
-	DietPlan diet= dietPlanRepository.findByFoodType(foodType);
-	if(diet==null) {
-		throw new DietPlanException("Id: "+foodType.toUpperCase()+"not exists");
-	}else {
-		 dietPlanRepository.delete(diet);
-		res=1;
-	}   
-	       return res;
-}
+/**---------------------------------------------------------------------------------------**/
+	/**
+	 * This method deleteByFoodType() is for deleting a DietPlan 
+	 */
+ 	@Override
+	public void deleteByFoodType(String foodType) {
+		DietPlan diet = dietPlanRepository.findByFoodType(foodType);
+		if (diet == null) {
+			throw new DietPlanException("Diet Plan with foodtype---" + foodType.toUpperCase() + " ---does not exists.");
+		}
+		dietPlanRepository.delete(diet);
+	}
 
 }
