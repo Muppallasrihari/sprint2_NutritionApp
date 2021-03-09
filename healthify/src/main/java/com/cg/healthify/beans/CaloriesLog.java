@@ -85,15 +85,7 @@ public class CaloriesLog {
 		this.updatedAt = updatedAt;
 	}
 	
-	@PrePersist
-	public void onCreate() {
-  	this.createdAt=LocalDateTime.now();
-    }
 	
-    @PreUpdate
-    public void onUpdate() {
-    this.updatedAt=LocalDateTime.now();
-    }
     @Override
 	public String toString() {
 		return "CaloriesLog [id=" + id + ", calories=" + calories + ", caloriesLogIdentifier=" + caloriesLogIdentifier

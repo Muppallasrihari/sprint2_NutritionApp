@@ -62,4 +62,4 @@ public class CaloriesLogController {
 		return new ResponseEntity<String>("Calories Log  with Id:"+caloriesLogIdentifier.toUpperCase()+ " deleted successfully",HttpStatus.OK);
 	}
 }
-
+//
